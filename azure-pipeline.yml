@@ -1,0 +1,29 @@
+pool:
+  vmImage: 'ubuntu-latest'
+ 
+steps:
+# Install Terraform
+- script: |
+    sudo apt-get update
+    sudo apt-get install -y wget unzip
+    wget https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip
+    unzip terraform_1.5.7_linux_amd64.zip
+    sudo mv terraform /usr/local/bin/
+    terraform -version
+  displayName: 'Install Terraform'
+ 
+# Login to Azure and run Terraform commands in same context
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'MDU-AzureCoE-Sandbox'  # Your Service Connection name
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      echo "Logged into Azure"
+      
+      # Initialize Terraform
+      terraform init
+      # Plan and Apply
+      terraform plan -out=tfplan
+      terraform apply -auto-approve tfplan
+  condition: succeeded()
