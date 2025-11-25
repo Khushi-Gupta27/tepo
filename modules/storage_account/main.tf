@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "sa" {
-  name                     = var.sa_name
+  name                     = ${var.storage_account_name}${substr(md5(var.webapp_id), 0, 6)}
   resource_group_name      = var.resource_group
   location                 = var.location
   account_tier             = "Standard"
