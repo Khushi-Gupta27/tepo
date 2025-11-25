@@ -5,6 +5,7 @@ module "storage_account" {
   location       = var.location
   resource_group = var.resource_group
   account_replication_type = "LRS"
+webapp_id = module.web_app.webapp_id
 }
 
 module "web_app" {
