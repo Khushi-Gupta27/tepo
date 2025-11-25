@@ -13,5 +13,5 @@ module "web_app" {
   app_name       = var.app_name
   location       = var.location
   resource_group = var.resource_group
-  webapp_id = module.web_app.webapp_id
+  
 }
