@@ -14,3 +14,5 @@ resource "azurerm_app_service" "webapp" {
   resource_group_name = var.resource_group
   app_service_plan_id = azurerm_app_service_plan.asp.id
 }
+output "webapp_id"
+value= "azurerm_app_service.webapp.id"
